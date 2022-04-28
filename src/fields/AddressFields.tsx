@@ -1,7 +1,9 @@
+import { object, string } from "yup";
+
 import Input from "../components/Input";
 import Stack from "../components/Stack";
 
-import type { Errors, FieldsProps } from "../types";
+import type { FieldsProps } from "../types";
 import type { FC } from "react";
 
 export type AddressValues = {
@@ -11,24 +13,14 @@ export type AddressValues = {
   building: string;
 };
 
-export const validateAddress = (values: AddressValues) => {
-  const errors: Errors<AddressValues> = {};
-  if (!values.country) {
-    errors.country = "Required";
-  }
-  if (!values.city) {
-    errors.city = "Required";
-  }
-  if (!values.zipcode) {
-    errors.zipcode = "Required";
-  } else if (!/\d{7}/.test(values.zipcode)) {
-    errors.zipcode = "Zipcode should have 7 numbers";
-  }
-  if (!values.building) {
-    errors.building = "Required";
-  }
-  return errors;
-};
+export const addressValidationSchema = object({
+  country: string().required("Required"),
+  city: string().required("Required"),
+  zipcode: string()
+    .required("Required")
+    .matches(/\d{7}/, "Zipcode should have 7 numbers"),
+  building: string().required("Required"),
+});
 
 type Props = FieldsProps<AddressValues>;
 

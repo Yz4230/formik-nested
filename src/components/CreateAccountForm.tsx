@@ -1,14 +1,16 @@
 import styled from "@emotion/styled";
 import { useFormik } from "formik";
+import { object } from "yup";
 
 import Stack from "./Stack";
 
-import AddressFields, { validateAddress } from "../fields/AddressFields";
-import PersonFields, { validatePerson } from "../fields/PersonFields";
+import AddressFields, {
+  addressValidationSchema,
+} from "../fields/AddressFields";
+import PersonFields, { personValidationSchema } from "../fields/PersonFields";
 
 import type { AddressValues } from "../fields/AddressFields";
 import type { PersonValues } from "../fields/PersonFields";
-import type { FormikErrors } from "formik";
 import type { FC } from "react";
 
 const Right = styled.div({
@@ -31,7 +33,7 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
       person: {
         firstName: "",
         lastName: "",
-        age: 20,
+        age: "",
       },
       address: {
         country: "",
@@ -40,20 +42,10 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
         building: "",
       },
     },
-    validate: (values) => {
-      const errors: FormikErrors<CreateAccoutFormValues> = {};
-
-      const personErrors = validatePerson(values.person);
-      if (Object.keys(personErrors).length > 0) {
-        errors.person = personErrors;
-      }
-
-      const addressErrors = validateAddress(values.address);
-      if (Object.keys(addressErrors).length > 0) {
-        errors.address = addressErrors;
-      }
-      return errors;
-    },
+    validationSchema: object({
+      person: personValidationSchema,
+      address: addressValidationSchema,
+    }),
     validateOnChange: false,
     onSubmit,
   });

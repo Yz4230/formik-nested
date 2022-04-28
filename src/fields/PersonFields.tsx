@@ -1,30 +1,25 @@
+import { number, object, string } from "yup";
+
 import Input from "../components/Input";
 import Stack from "../components/Stack";
 
-import type { Errors, FieldsProps } from "../types";
+import type { FieldsProps } from "../types";
 import type { FC } from "react";
 
 export type PersonValues = {
   firstName: string;
   lastName: string;
-  age: number;
+  age: string;
 };
 
-export const validatePerson = (values: PersonValues) => {
-  const errors: Errors<PersonValues> = {};
-  if (!values.firstName) {
-    errors.firstName = "Required";
-  }
-  if (!values.lastName) {
-    errors.lastName = "Required";
-  }
-  if (!values.age) {
-    errors.age = "Required";
-  } else if (values.age < 0 || values.age > 120) {
-    errors.age = "Age should be between 0 and 120";
-  }
-  return errors;
-};
+export const personValidationSchema = object({
+  firstName: string().required("Required"),
+  lastName: string().required("Required"),
+  age: number()
+    .required("Required")
+    .min(0, "Age should be more than 0")
+    .max(120, "Age should be less than 120"),
+});
 
 type Props = FieldsProps<PersonValues>;
 
@@ -56,7 +51,7 @@ const PersonFields: FC<Props> = ({ values, errors, onChange }) => {
         value={values.age}
         error={errors?.age}
         onChange={(e) => {
-          onChange({ ...values, age: Number(e.target.value) });
+          onChange({ ...values, age: e.target.value });
         }}
       />
     </Stack>
