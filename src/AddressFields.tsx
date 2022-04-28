@@ -38,49 +38,49 @@ const Stack = styled.div({
 });
 
 type Props = {
+  name?: string;
   values: AddressValues;
   errors?: FormikErrors<AddressValues>;
-  onChange: (values: AddressValues) => void;
+  handleChange: (e: React.ChangeEvent) => void;
 };
 
-const AddressFields: FC<Props> = ({ values, errors, onChange }) => {
+const AddressFields: FC<Props> = ({ name, values, errors, handleChange }) => {
+  const getName = (key: string) => {
+    if (name) {
+      return `${name}.${key}`;
+    }
+    return key;
+  };
+
   return (
     <Stack>
       <Input
         label="Country"
-        name="country"
+        name={getName("country")}
         value={values.country}
         error={errors?.country}
-        onChange={(e) => {
-          onChange({ ...values, country: e.target.value });
-        }}
+        onChange={handleChange}
       />
       <Input
         label="City"
-        name="city"
+        name={getName("city")}
         value={values.city}
         error={errors?.city}
-        onChange={(e) => {
-          onChange({ ...values, city: e.target.value });
-        }}
+        onChange={handleChange}
       />
       <Input
         label="Zipcode"
-        name="zipcode"
+        name={getName("zipcode")}
         value={values.zipcode}
         error={errors?.zipcode}
-        onChange={(e) => {
-          onChange({ ...values, zipcode: e.target.value });
-        }}
+        onChange={handleChange}
       />
       <Input
         label="Building"
-        name="building"
+        name={getName("building")}
         value={values.building}
         error={errors?.building}
-        onChange={(e) => {
-          onChange({ ...values, building: e.target.value });
-        }}
+        onChange={handleChange}
       />
     </Stack>
   );

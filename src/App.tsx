@@ -51,11 +51,10 @@ function App() {
     <Container>
       <form css={{ width: "20em" }} onSubmit={formik.handleSubmit}>
         <AddressFields
+          name="address"
           values={formik.values.address}
           errors={formik.errors.address}
-          onChange={(values) => {
-            formik.setFieldValue("address", values);
-          }}
+          handleChange={formik.handleChange}
         />
         <div
           css={{
