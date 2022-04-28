@@ -1,9 +1,8 @@
-import styled from "@emotion/styled";
+import Input from "../components/Input";
+import Stack from "../components/Stack";
 
-import Input from "../Input";
-
+import type { Errors, FieldsProps } from "../types";
 import type { FC } from "react";
-import { Errors, FieldsProps } from "../types";
 
 export type AddressValues = {
   country: string;
@@ -30,12 +29,6 @@ export const validateAddress = (values: AddressValues) => {
   }
   return errors;
 };
-
-const Stack = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  gap: "0.5em",
-});
 
 type Props = FieldsProps<AddressValues>;
 

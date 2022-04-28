@@ -1,7 +1,8 @@
-import styled from "@emotion/styled";
-import { FC } from "react";
-import Input from "../Input";
-import { Errors, FieldsProps } from "../types";
+import Input from "../components/Input";
+import Stack from "../components/Stack";
+
+import type { Errors, FieldsProps } from "../types";
+import type { FC } from "react";
 
 export type PersonValues = {
   firstName: string;
@@ -24,12 +25,6 @@ export const validatePerson = (values: PersonValues) => {
   }
   return errors;
 };
-
-const Stack = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  gap: "0.5em",
-});
 
 type Props = FieldsProps<PersonValues>;
 

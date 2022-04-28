@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
 import { useFormik } from "formik";
+import { useState } from "react";
 
+import Stack from "./components/Stack";
 import AddressFields, { validateAddress } from "./fields/AddressFields";
+import PersonFields, { validatePerson } from "./fields/PersonFields";
 
 import type { AddressValues } from "./fields/AddressFields";
+import type { PersonValues } from "./fields/PersonFields";
 import type { FormikErrors } from "formik";
-import { useState } from "react";
-import PersonFields, {
-  PersonValues,
-  validatePerson,
-} from "./fields/PersonFields";
 
 const Container = styled.div({
   width: "100vw",
@@ -70,19 +69,24 @@ function App() {
 
   return (
     <Container>
+      <h1>Create Account</h1>
       <form css={{ width: "20em" }} onSubmit={formik.handleSubmit}>
-        <PersonFields
-          values={formik.values.person}
-          errors={formik.errors.person}
-          onChange={(values) => formik.setFieldValue("person", values)}
-        />
-        <AddressFields
-          values={formik.values.address}
-          errors={formik.errors.address}
-          onChange={(values) => {
-            formik.setFieldValue("address", values);
-          }}
-        />
+        <Stack>
+          <h2>Your Information</h2>
+          <PersonFields
+            values={formik.values.person}
+            errors={formik.errors.person}
+            onChange={(values) => formik.setFieldValue("person", values)}
+          />
+          <h2>Address</h2>
+          <AddressFields
+            values={formik.values.address}
+            errors={formik.errors.address}
+            onChange={(values) => {
+              formik.setFieldValue("address", values);
+            }}
+          />
+        </Stack>
         <Right css={{ marginTop: "1em" }}>
           <button type="submit">Submit</button>
         </Right>
