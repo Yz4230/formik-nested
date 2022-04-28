@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
-import Input from "./Input";
+import Input from "../Input";
 
 import type { FC } from "react";
-import { Errors, FieldsProps } from "./types";
+import { Errors, FieldsProps } from "../types";
 
 export type AddressValues = {
   country: string;

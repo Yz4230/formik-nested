@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { useFormik } from "formik";
 
-import AddressFields, { validateAddress } from "./AddressFields";
+import AddressFields, { validateAddress } from "./fields/AddressFields";
 
-import type { AddressValues } from "./AddressFields";
+import type { AddressValues } from "./fields/AddressFields";
 import type { FormikErrors } from "formik";
 import { useState } from "react";
 
