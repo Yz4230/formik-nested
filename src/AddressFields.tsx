@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 
 import Input from "./Input";
 
-import type { FormikErrors } from "formik";
 import type { FC } from "react";
+import { Errors, FieldsProps } from "./types";
 
 export type AddressValues = {
   country: string;
@@ -13,7 +13,7 @@ export type AddressValues = {
 };
 
 export const validateAddress = (values: AddressValues) => {
-  const errors: FormikErrors<AddressValues> = {};
+  const errors: Errors<AddressValues> = {};
   if (!values.country) {
     errors.country = "Required";
   }
@@ -37,11 +37,7 @@ const Stack = styled.div({
   gap: "0.5em",
 });
 
-type Props = {
-  values: AddressValues;
-  errors?: FormikErrors<AddressValues>;
-  onChange: (values: AddressValues) => void;
-};
+type Props = FieldsProps<AddressValues>;
 
 const AddressFields: FC<Props> = ({ values, errors, onChange }) => {
   return (
