@@ -6,6 +6,10 @@ import AddressFields, { validateAddress } from "./fields/AddressFields";
 import type { AddressValues } from "./fields/AddressFields";
 import type { FormikErrors } from "formik";
 import { useState } from "react";
+import PersonFields, {
+  PersonValues,
+  validatePerson,
+} from "./fields/PersonFields";
 
 const Container = styled.div({
   width: "100vw",
@@ -22,6 +26,7 @@ const Right = styled.div({
 });
 
 type Form = {
+  person: PersonValues;
   address: AddressValues;
 };
 
@@ -30,6 +35,11 @@ function App() {
 
   const formik = useFormik<Form>({
     initialValues: {
+      person: {
+        firstName: "",
+        lastName: "",
+        age: 20,
+      },
       address: {
         country: "",
         city: "",
@@ -39,6 +49,12 @@ function App() {
     },
     validate: (values) => {
       const errors: FormikErrors<Form> = {};
+
+      const personErrors = validatePerson(values.person);
+      if (Object.keys(personErrors).length > 0) {
+        errors.person = personErrors;
+      }
+
       const addressErrors = validateAddress(values.address);
       if (Object.keys(addressErrors).length > 0) {
         errors.address = addressErrors;
@@ -55,6 +71,11 @@ function App() {
   return (
     <Container>
       <form css={{ width: "20em" }} onSubmit={formik.handleSubmit}>
+        <PersonFields
+          values={formik.values.person}
+          errors={formik.errors.person}
+          onChange={(values) => formik.setFieldValue("person", values)}
+        />
         <AddressFields
           values={formik.values.address}
           errors={formik.errors.address}
