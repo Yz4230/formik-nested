@@ -16,6 +16,11 @@ const Container = styled.div({
   alignItems: "center",
 });
 
+const Right = styled.div({
+  display: "flex",
+  justifyContent: "flex-end",
+});
+
 type Form = {
   address: AddressValues;
 };
@@ -57,15 +62,9 @@ function App() {
             formik.setFieldValue("address", values);
           }}
         />
-        <div
-          css={{
-            marginTop: "1em",
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
+        <Right css={{ marginTop: "1em" }}>
           <button type="submit">Submit</button>
-        </div>
+        </Right>
       </form>
       {submitValue && (
         <div css={{ marginTop: "1em" }}>
