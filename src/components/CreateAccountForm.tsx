@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useFormik } from "formik";
 
 import Stack from "./Stack";
+import TitledCard from "./TitledCard";
 
 import AddressFields, { validateAddress } from "../fields/AddressFields";
 import PersonFields, { validatePerson } from "../fields/PersonFields";
@@ -63,20 +64,22 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
       <h1>Create Account</h1>
       <form css={{ width: "20em" }} onSubmit={formik.handleSubmit}>
         <Stack>
-          <h2>Your Information</h2>
-          <PersonFields
-            values={formik.values.person}
-            errors={formik.errors.person}
-            onChange={(values) => formik.setFieldValue("person", values)}
-          />
-          <h2>Address</h2>
-          <AddressFields
-            values={formik.values.address}
-            errors={formik.errors.address}
-            onChange={(values) => {
-              formik.setFieldValue("address", values);
-            }}
-          />
+          <TitledCard title="Your Information">
+            <PersonFields
+              values={formik.values.person}
+              errors={formik.errors.person}
+              onChange={(values) => formik.setFieldValue("person", values)}
+            />
+          </TitledCard>
+          <TitledCard title="Address">
+            <AddressFields
+              values={formik.values.address}
+              errors={formik.errors.address}
+              onChange={(values) => {
+                formik.setFieldValue("address", values);
+              }}
+            />
+          </TitledCard>
           <Right>
             <button type="submit">Submit</button>
           </Right>
