@@ -75,9 +75,7 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
             <AddressFields
               values={formik.values.address}
               errors={formik.errors.address}
-              onChange={(values) => {
-                formik.setFieldValue("address", values);
-              }}
+              onChange={(values) => formik.setFieldValue("address", values)}
             />
           </TitledCard>
           <Right>
