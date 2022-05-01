@@ -1,3 +1,5 @@
+import Stack from "./Stack";
+
 import type { FC } from "react";
 
 type Props = {
@@ -8,7 +10,7 @@ const TitledCard: FC<Props> = ({ title, children }) => {
   return (
     <div>
       <h2>{title}</h2>
-      {children}
+      <Stack>{children}</Stack>
     </div>
   );
 };
