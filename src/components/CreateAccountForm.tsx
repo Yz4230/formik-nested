@@ -5,13 +5,11 @@ import Stack from "./Stack";
 import TitledCard from "./TitledCard";
 
 import AddressFields, { validateAddress } from "../fields/AddressFields";
-import PaymentFields from "../fields/PaymentFields";
-import PaymentInPartsFields from "../fields/PaymentInPartsFields";
+import PaymentFields, { validatePayment } from "../fields/PaymentFields";
 import PersonFields, { validatePerson } from "../fields/PersonFields";
 
 import type { AddressValues } from "../fields/AddressFields";
 import type { PaymentValues } from "../fields/PaymentFields";
-import type { PaymentInPartsValues } from "../fields/PaymentInPartsFields";
 import type { PersonValues } from "../fields/PersonFields";
 import type { FormikErrors } from "formik";
 import type { FC } from "react";
@@ -25,7 +23,6 @@ export type CreateAccoutFormValues = {
   person: PersonValues;
   address: AddressValues;
   payment: PaymentValues;
-  paymentInparts: PaymentInPartsValues;
 };
 
 type Props = {
@@ -49,9 +46,6 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
       payment: {
         paymentOption: "inFull",
       },
-      paymentInparts: {
-        paymentParts: 3,
-      },
     },
     validate: (values) => {
       const errors: FormikErrors<CreateAccoutFormValues> = {};
@@ -65,6 +59,12 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
       if (Object.keys(addressErrors).length > 0) {
         errors.address = addressErrors;
       }
+
+      const paymentErrors = validatePayment(values.payment);
+      if (Object.keys(paymentErrors).length > 0) {
+        errors.payment = paymentErrors;
+      }
+
       return errors;
     },
     validateOnChange: false,
@@ -96,13 +96,6 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
               errors={formik.errors.payment}
               onChange={(values) => formik.setFieldValue("payment", values)}
             />
-            {formik.values.payment.paymentOption === "inParts" && (
-              <PaymentInPartsFields
-                values={formik.values.paymentInparts}
-                errors={formik.errors.paymentInparts}
-                onChange={(values) => formik.setFieldValue("payment", values)}
-              />
-            )}
           </TitledCard>
           <Right>
             <button type="submit">Submit</button>
