@@ -33,15 +33,15 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
   const formik = useFormik<CreateAccoutFormValues>({
     initialValues: {
       person: {
-        firstName: "",
-        lastName: "",
+        firstName: "John",
+        lastName: "Doe",
         age: 20,
       },
       address: {
-        country: "",
-        city: "",
-        zipcode: "",
-        building: "",
+        country: "Japan",
+        city: "Tokyo",
+        zipcode: "1234567",
+        building: "1F",
       },
       payment: {
         paymentOption: "inFull",
