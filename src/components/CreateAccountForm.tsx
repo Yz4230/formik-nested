@@ -19,18 +19,18 @@ const Right = styled.div({
   justifyContent: "flex-end",
 });
 
-export type CreateAccoutFormValues = {
+export type CreateAccountFormValues = {
   person: PersonValues;
   address: AddressValues;
   payment: PaymentValues;
 };
 
 type Props = {
-  onSubmit: (values: CreateAccoutFormValues) => void;
+  onSubmit: (values: CreateAccountFormValues) => void;
 };
 
 const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
-  const formik = useFormik<CreateAccoutFormValues>({
+  const formik = useFormik<CreateAccountFormValues>({
     initialValues: {
       person: {
         firstName: "John",
@@ -48,7 +48,7 @@ const CreateAccountForm: FC<Props> = ({ onSubmit }) => {
       },
     },
     validate: (values) => {
-      const errors: FormikErrors<CreateAccoutFormValues> = {};
+      const errors: FormikErrors<CreateAccountFormValues> = {};
 
       const personErrors = validatePerson(values.person);
       if (Object.keys(personErrors).length > 0) {

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import CreateAccountForm from "./components/CreateAccountForm";
 
-import type { CreateAccoutFormValues } from "./components/CreateAccountForm";
+import type { CreateAccountFormValues } from "./components/CreateAccountForm";
 
 const Container = styled.div({
   width: "100vw",
@@ -15,7 +15,7 @@ const Container = styled.div({
 });
 
 function App() {
-  const [submitValue, setSubmitValue] = useState<CreateAccoutFormValues>();
+  const [submitValue, setSubmitValue] = useState<CreateAccountFormValues>();
 
   return (
     <Container>
